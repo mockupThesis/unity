@@ -51,7 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\RobotMovement.cs" />
+     <Compile Include="Assets\Scripts\IControllable.cs" />
+     <Compile Include="Assets\Scripts\MqttComponent.cs" />
+     <Compile Include="Assets\Scripts\RobotMovement.cs" />
  <Reference Include="UnityEngine.UIAutomation">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
  </Reference>
@@ -140,7 +142,7 @@
  <HintPath>/Users/martesz/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="M2Mqtt.Net">
- <HintPath>/Users/martesz/MotionControl/Assets/M2Mqtt.Net.dll</HintPath>
+ <HintPath>/Users/martesz/MotionControl/Assets/3rd-Party/M2Mqtt.Net.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

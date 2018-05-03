@@ -19,9 +19,10 @@ public class MqttComponent
 		Connect ();
 		Publish ("sensor/status", "Unity client connected");
 		mqttclient.MqttMsgPublishReceived += MqttMsgPublishReceived;
-		string[] topics = { "sensor/quat" };
+		string[] topics = { "sensor/RightUpperArm" };
 		byte[] qosLevels = { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE };
 		mqttclient.Subscribe (topics, qosLevels);
+		mqttclient.Subscribe (new string[] { "sensor/RightLowerArm" }, qosLevels);
 	}
 
 	void MqttMsgPublishReceived (object sender, MqttMsgPublishEventArgs e)
@@ -30,7 +31,12 @@ public class MqttComponent
 		Debug.Log ("Received message from " + e.Topic + " : " + msg);
 		string[] msgParts = msg.Split ('|');
 		Quaternion received = new Quaternion (float.Parse (msgParts [1]), float.Parse (msgParts [2]), float.Parse (msgParts [3]), float.Parse (msgParts [0]));
-		controllable.control (HumanBodyBones.RightUpperArm, received);
+
+		if (e.Topic.Equals ("sensor/RightUpperArm")) {
+			controllable.control (HumanBodyBones.RightUpperArm, received);
+		} else {
+			controllable.control (HumanBodyBones.RightLowerArm, received);
+		}
 	}
 
 	private void Connect ()
@@ -49,6 +55,7 @@ public class MqttComponent
 	{
 		mqttclient.Publish (topic, Encoding.UTF8.GetBytes (msg), MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE, false);
 	}
+		
 }
 
 

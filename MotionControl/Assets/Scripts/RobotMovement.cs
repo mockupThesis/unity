@@ -50,7 +50,7 @@ public class RobotMovement : MonoBehaviour, IControllable
 
 	public void control (HumanBodyBones bone, Quaternion quaternion)
 	{
-		quaternions.Add (bone, quaternion);
+		quaternions[bone] = quaternion;
 	}
 
 }
